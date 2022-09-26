@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+  } 
+
+  body {
+    background-color: #000;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  :root {
+    --primary: #4f46e5;
+    --error: #b91c1c;
+    --gray: #6b7280;
+    --white: #fff;
+    --red-card: #ff005c;
+    --violet-card: #4c1d95;
+    --black-card: #181818;
+  }
+
+.query__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 30px
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn {
+  background-color: var(--primary);
+  outline: none;
+  border: none;
+  color: var(--white);
+  padding: 8px 10px;
+  margin-right: 0;
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+}
+
+.btn:hover{
+    background-color: red;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-5px);
+}
+
+.card__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img {
+    
+    height: 200px;
+    width: 200px;
+}
+
