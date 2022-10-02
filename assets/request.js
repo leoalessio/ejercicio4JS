@@ -1,11 +1,15 @@
 
-//conectamos con API
-const requestPokemon = async (id) => {
-    const baseURL = `https://pokeapi.co/api/v2/pokemon/${id}`;
-    const query = `${id}`;
-    const response = await fetch(baseURL + query)
-    .then(response => response.json())
-    .catch(reject=> console.error(reject))
+const requestPokemon = async (number) => {    
+   const baseURL = `https://pokeapi.co/api/v2/pokemon/`;
+   const query = `${number}`;
+        try {
+                const response = await fetch(baseURL + query);
+                // transfmoramos respuesta en Json
+                const data = await response.json();
+                return data;   
+        } catch {
+                return null;
+        }
 
-    return response;
-}
+};
+

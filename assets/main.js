@@ -2,48 +2,63 @@ const form = document.getElementById("form");
 const input = document.getElementById("input");
 const btn = document.querySelector(".btn");
 const card = document.getElementById("card");
-const mensajeError = document.querySelector(".mensajeError")
 
+// mensaje de error input vacío
+const errorVacio = () => {
+  card.innerHTML= `
+  <div class="error__container>
+  <h2 class="error"> Por favor ingrese un número</h2>
+  </div>
+  `;
+}
 
+const renderResult = async (pokemon) => {
+  const newPokemon = await pokemon;
+  if (!newPokemon){
+    card.innerHTML = `
+    <div class="error__container>
+    <h2 class="error"> No encontramos ese pokemón, por favor ingrese nuevamente un número</h2>
+    </div>
+    `
+  } else {
+    card.innerHTML = renderPK(newPokemon);
+  }
+}
+//renderizamos
+const renderPK = (pokemon) => {
+  const {name, sprites, height, weight, types} = pokemon;
+  return `
+  <div class="poke__card"> 
+    <img src="${sprites.other.dream_world.front_default}" class="pk__img">
+    <h2>${name.toUpperCase()}</h2>
+    <p class="tipo__pk"> Tipos: ${types.map(tipo => {
+      return `<span> ${tipo.type.name.toUpperCase()} </span>`
+    })
+    .join("")} </p>
 
-const renderCards = (pokemon) => {
-    let convertirAltura = (altura) => {
-        let alturaMetro = altura / 10;
-        return alturaMetro
-    };
-    
-    let convertirPeso = (peso) => {
-        let pesoKilos = peso / 10;
-        return pesoKilos;
-    };
-    
-    return `
-  <img  class='img' src="${ pokemon.sprites.front_default}" alt="${pokemon.name}"></img>
-  <h2 class='name'>${pokemon.name.toUpperCase()}</h2>
-  <span class='altura'>Altura: ${convertirAltura(pokemon.height)} metros</span>
-  <span class='peso'>Peso: ${convertirPeso(pokemon.weight)} kg</span>
-  <p class='tipos'>Tipo: ${pokemon.types[0].type.name}</p>
+    <p class="altura"> Altura: ${height / 10} metros</p>
+    <p class="peso"> Peso: ${weight / 10} kg</p>
+    </div>
   `
 }
 
-const obtenerPokemon = async e => {
-    e.preventDefault();
-
-    let id = input.value.trim();
-
-    const pokemon = await requestPokemon(id);
-
-    console.log(pokemon)
-
-    cards.innerHTML = renderCards(pokemon);
-    cards.classList.add('arreglosCard');
-
-
+//funcion para buscar Pokemon
+const buscarPk = async e => {
+  e.preventDefault();
+  // capturamos el valor del input
+  const searchedValue = input.value.trim();
+  if (!searchedValue) {
+    errorVacio();
+    return;
+  }
+  const searchedPK = requestPokemon(Number(searchedValue))
+  renderResult(searchedPK);
+  form.reset();
 };
 
-init = () => {
-    form.addEventListener('submit', obtenerPokemon);
-
+// funcion para llamar todo
+const init = () => {
+  form.addEventListener("submit", buscarPk);
 };
 
 init();
