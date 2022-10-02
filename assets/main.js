@@ -19,7 +19,7 @@ const renderCards = (pokemon) => {
     
     return `
   <img  class='img' src="${ pokemon.sprites.front_default}" alt="${pokemon.name}"></img>
-  <h2 class='name'>${pokemon.name}</h2>
+  <h2 class='name'>${pokemon.name.toUpperCase()}</h2>
   <span class='altura'>Altura: ${convertirAltura(pokemon.height)} metros</span>
   <span class='peso'>Peso: ${convertirPeso(pokemon.weight)} kg</span>
   <p class='tipos'>Tipo: ${pokemon.types[0].type.name}</p>
